@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbf25b5a-4a6a-49dc-9eff-45c93c5ff202" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/firebase-debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/firebase-debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +49,7 @@
       <workItem from="1615808536702" duration="167000" />
       <workItem from="1615809666904" duration="373000" />
       <workItem from="1616000459801" duration="3000" />
+      <workItem from="1616154117756" duration="31000" />
     </task>
     <servers />
   </component>
