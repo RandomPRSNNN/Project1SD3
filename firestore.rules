@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+  //match logged in user doc in users collection
+  match /users/{userId}{
+  allow create: if request.auth.id != null;
+  allow read: if request.auth.uid == userId;
+}
+
+    //allow read for anyone ADMIN only write
+    match /{document=**} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.token.admin == true;
+    }
+  }
+}

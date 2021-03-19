@@ -1,0 +1,305 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Management</title>
+    <link rel="shortcut icon" href="img/logo-noText.svg">
+</head>
+<body class="grey lighten-3">
+
+<!-- NAVBAR -->
+<nav class="grey lighten-4">
+    <div class="nav-wrapper container">
+        <a class="brand-logo">
+            <img src="img/logo.svg" style="width: 180px; margin-top: 10px;">
+        </a>
+        <ul class="right">
+            <li class="logged-out" style="display: none;">
+                <a class="grey-text modal-trigger" data-target="modal-login">Login</a>
+            </li>
+            <li class="logged-in" style="display: none;">
+                <a class="grey-text modal-trigger admin" data-target="modal-signup">New User</a>
+            </li>
+            <li class="logged-in" style="display: none;">
+                <a class="grey-text modal-trigger admin" data-target="modal-make-admin">Assign Admin</a>
+            </li>
+            <li class="logged-in" style="display: none;">
+                <a class="grey-text" id="logout">Logout</a>
+            </li>
+            </span>
+        </ul>
+    </div>
+</nav>
+
+<!--MAKE ADMIN MODAL -->
+<div id="modal-make-admin" class="modal">
+    <div class="modal-content">
+        <h4>Assign as Admin</h4>
+        <form class="center-align admin-actions admin" style="margin: 40px auto; max-width: 300px; display: none;">
+            <input type="email" placeholder="Email of new admin account" id="admin-email" required/>
+            <button class="btn-small green">Make admin</button>
+        </form>
+    </div>
+</div>
+
+<!-- SIGN UP MODAL -->
+<div id="modal-signup" class="modal">
+    <div class="modal-content">
+        <h4>Sign up</h4><br/>
+        <form id="signup-form">
+            <div class="input-field">
+                <input type="email" id="signup-email" required/>
+                <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="signup-password" required/>
+                <label for="signup-password">Choose password</label>
+            </div>
+            <button class="btn green">Sign up</button>
+            <p class="error red-text center-align"></p>
+        </form>
+    </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div id="modal-login" class="modal">
+    <div class="modal-content">
+        <h4>Login</h4><br/>
+        <form id="login-form">
+            <div class="input-field">
+                <input type="email" id="login-email" required/>
+                <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="login-password" required/>
+                <label for="login-password">Your password</label>
+            </div>
+            <button class="btn green">Login</button>
+            <p class="error red-text center-align"></p>
+        </form>
+    </div>
+</div>
+
+<!-- CREATE TASK MODAL -->
+<div id="modal-task" class="modal">
+    <div class="modal-content">
+        <h4>Create New Task</h4><br/>
+        <form id="create-task">
+            <div class="input-field">
+                <input type="text" id="title" required>
+                <label for="title">Task title</label>
+            </div>
+            <div class="input-field">
+                <textarea id="content" class="materialize-textarea" required></textarea>
+                <label for="content">Task description</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Create</button>
+        </form>
+    </div>
+</div>
+
+<!-- CREATE TIMETABLE MODAL -->
+<div id="modal-timetable" class="modal modal-t">
+    <div class="modal-content">
+        <!-- TIMETABLE -->
+        <input type="text" class="datepicker" id="timetable-date" placeholder="Week beginning: Click to select"
+               required>
+        <table class="responsive-table centered highlight timetable">
+            <form id="timetable">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>9.00</th>
+                    <th>10.00</th>
+                    <th>11.00</th>
+                    <th>12.00</th>
+                    <th>13.00</th>
+                    <th>14.00</th>
+                    <th>15.00</th>
+                    <th>16.00</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Monday</td>
+                    <td><input type="text" id="timeMon9"></td>
+                    <td><input type="text" id="timeMon10"></td>
+                    <td><input type="text" id="timeMon11"></td>
+                    <td><input type="text" id="timeMon12"></td>
+                    <td><input type="text" id="timeMon13"></td>
+                    <td><input type="text" id="timeMon14"></td>
+                    <td><input type="text" id="timeMon15"></td>
+                    <td><input type="text" id="timeMon16"></td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td><input type="text" id="timeTue9"></td>
+                    <td><input type="text" id="timeTue10"></td>
+                    <td><input type="text" id="timeTue11"></td>
+                    <td><input type="text" id="timeTue12"></td>
+                    <td><input type="text" id="timeTue13"></td>
+                    <td><input type="text" id="timeTue14"></td>
+                    <td><input type="text" id="timeTue15"></td>
+                    <td><input type="text" id="timeTue16"></td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td><input type="text" id="timeWed9"></td>
+                    <td><input type="text" id="timeWed10"></td>
+                    <td><input type="text" id="timeWed11"></td>
+                    <td><input type="text" id="timeWed12"></td>
+                    <td><input type="text" id="timeWed13"></td>
+                    <td><input type="text" id="timeWed14"></td>
+                    <td><input type="text" id="timeWed15"></td>
+                    <td><input type="text" id="timeWed16"></td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td><input type="text" id="timeThu9"></td>
+                    <td><input type="text" id="timeThu10"></td>
+                    <td><input type="text" id="timeThu11"></td>
+                    <td><input type="text" id="timeThu12"></td>
+                    <td><input type="text" id="timeThu13"></td>
+                    <td><input type="text" id="timeThu14"></td>
+                    <td><input type="text" id="timeThu15"></td>
+                    <td><input type="text" id="timeThu16"></td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td><input type="text" id="timeFri9"></td>
+                    <td><input type="text" id="timeFri10"></td>
+                    <td><input type="text" id="timeFri11"></td>
+                    <td><input type="text" id="timeFri12"></td>
+                    <td><input type="text" id="timeFri13"></td>
+                    <td><input type="text" id="timeFri14"></td>
+                    <td><input type="text" id="timeFri15"></td>
+                    <td><input type="text" id="timeFri16"></td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td><input type="text" id="timeSat9"></td>
+                    <td><input type="text" id="timeSat10"></td>
+                    <td><input type="text" id="timeSat11"></td>
+                    <td><input type="text" id="timeSat12"></td>
+                    <td><input type="text" id="timeSat13"></td>
+                    <td><input type="text" id="timeSat14"></td>
+                    <td><input type="text" id="timeSat15"></td>
+                    <td><input type="text" id="timeSat16"></td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td><input type="text" id="timeSun9"></td>
+                    <td><input type="text" id="timeSun10"></td>
+                    <td><input type="text" id="timeSun11"></td>
+                    <td><input type="text" id="timeSun12"></td>
+                    <td><input type="text" id="timeSun13"></td>
+                    <td><input type="text" id="timeSun14"></td>
+                    <td><input type="text" id="timeSun15"></td>
+                    <td><input type="text" id="timeSun16"></td>
+                </tr>
+                </tbody>
+            </form>
+        </table>
+        <br>
+        <div class="right-align"><a type="submit" class="btn-small green modal-close" onclick="newTimetable(event)">Create</a>
+        </div>
+    </div>
+</div>
+
+<!--TASKS + GRAPH -->
+<div class="row center-align logged-in">
+    <div class="col s6">
+        <div class="container admin" style="margin-top: 40px; display: none;">
+            <!-- CREATE TASK BUTTON -->
+            <div class="right-align"><a href="#" class="modal-trigger waves-effect waves-light btn-small green"
+                                        data-target="modal-task">New Task</a></div>
+            <!-- TASK LIST -->
+            <ul class="collapsible expandable taskList"></ul>
+        </div>
+    </div>
+    <!-- GRAPH -->
+    <div class="col s6 admin" style="display: none;">
+        <div class="container" style="margin-top: 40px;">
+            <div class="card center-align">
+                <div id="curve_chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TIMETABLE DISPLAY -->
+<div class="row center-align logged-in">
+    <div class="container center-align">
+        <div class="col s12">
+            <ul class="collapsible expandable">
+                <li>
+                    <div class="collapsible-header grey lighten-4">Timetables</div>
+                    <div class="collapsible-body white">
+                        <div class="right-align">
+                            <!-- TIMETABLE BUTTON -->
+                            <div class="admin" style="display: none;"><a
+                                    class="modal-trigger waves-effect waves-light btn-small green"
+                                    data-target="modal-timetable">New Timetable</a></div>
+                        </div>
+                        <!-- TIMETABLES LISTED -->
+                        <ul class="collapsible expandable listTimetables"></ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- HIDE SCROLL BARS + TIMETABLE MODAL CHANGE BEHAVIOUR-->
+<style>
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent; /* make scrollbar transparent */
+    }
+
+    .modal-t {
+        top: 0px !important;
+        max-height: 100% !important;
+    }
+</style>
+
+
+<!-- GOOGLE CHART -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Year', 'Sales', 'Expenses'],
+            ['2004', 1000, 400],
+            ['2005', 1170, 460],
+            ['2006', 660, 1120],
+            ['2007', 1030, 540]
+        ]);
+
+        var options = {
+            title: 'Company Performance',
+            curveType: 'function',
+            legend: {position: 'bottom'}
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-functions.js"></script>
+<script src="scripts/firebaseConfig.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="scripts/auth.js"></script>
+<script src="scripts/timetable.js"></script>
+<script src="scripts/taskList.js"></script>
+<script src="scripts/index.js"></script>
+</body>
+</html>
