@@ -14,6 +14,10 @@ auth.onAuthStateChanged(user => {
             setupTimetable(snapshot.docs);
             setupUI(user);
         }, err => console.log(err.message));
+        db.collection('vacationRequests').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+            setupVacationRequests(snapshot.docs);
+            setupUI(user);
+        }, err => console.log(err.message));
     } else {
         setupUI();
     }

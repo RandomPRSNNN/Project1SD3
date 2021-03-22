@@ -25,6 +25,11 @@
             <li class="logged-in" style="display: none;">
                 <a class="grey-text" id="logout">Logout</a>
             </li>
+
+            <li class="logged-in" style="display: none;">
+                <a class="grey-text modal-trigger" data-target="modal-vacation">Request Vacation</a>
+            </li>
+
             </span>
         </ul>
     </div>
@@ -40,6 +45,9 @@
         </form>
     </div>
 </div>
+
+
+
 
 <!-- SIGN UP MODAL -->
 <div id="modal-signup" class="modal">
@@ -75,6 +83,39 @@
             </div>
             <button class="btn green">Login</button>
             <p class="error red-text center-align"></p>
+        </form>
+    </div>
+</div>
+
+<div class="logged-in" style="display: none;">
+    <div class="admin">
+        <!-- VACATION LIST! -->
+        <ul class="collapsible expandable vacationList"></ul>
+    </div>
+</div>
+
+<!-- REQUEST VACATION TIME MODAL -->
+<div id="modal-vacation" class="modal">
+    <div class="modal-content">
+        <h4>Request Vacation Time</h4><br/>
+        <form id="create-vacation">
+            <div class="input-field">
+                <input type="text" id="vacName" required>
+                <label for="title">Name</label>
+            </div>
+            <div>
+                <input type="text" class="datepickerNotMondays" id="vacDate"
+                       placeholder="Vacation time beginning: Select date">
+            </div>
+            <div class="input-field">
+                <input type="text" id="vacNumberOfDays" required>
+                <label for="title">Number of days required</label>
+            </div>
+            <div class="input-field">
+                <textarea id="vacReason" class="materialize-textarea" required></textarea>
+                <label for="content">Reason for request</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Create</button>
         </form>
     </div>
 </div>
@@ -301,5 +342,6 @@
 <script src="scripts/timetable.js"></script>
 <script src="scripts/taskList.js"></script>
 <script src="scripts/index.js"></script>
+<script src="scripts/vacationRequests.js"></script>
 </body>
 </html>

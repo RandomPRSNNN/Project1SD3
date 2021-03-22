@@ -312,7 +312,7 @@ const setupTimetable = (data) => {
                                 </form>
                             </table><br>
                             <div class="right-align"><a class="orange btn-small modal-close"
-                             onclick="updateTimetable('${docID}')">Update</a></div>
+                             onclick="updateTimetable('${docID}')" >Update</a></div>
                     </div>
                 </div>`
 

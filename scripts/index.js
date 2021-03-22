@@ -18,6 +18,7 @@ const setupUI = (user) => {
     loggedOutLinks.forEach(item => item.style.display = 'block');
   }
   setUpButtons();
+  console.log("Setting UP UI (hiding)")
 };
 
 
@@ -56,6 +57,15 @@ function setUpButtons() {
   });
 
 
+  var elems = document.querySelectorAll('.datepickerNotMondays');
+  var instances = M.Datepicker.init(elems, {
+    firstDay: 1,
+    format: 'dd mmmm, yyyy',
+  });
+
+
+
+
   console.log("Setting up  mCSS buttons");
   //dropdown button setup
   var elements = document.querySelectorAll('.dropdown-trigger');
@@ -63,6 +73,8 @@ function setUpButtons() {
     closeOnClick: false,
     constrainWidth: false
   });
+
+
 }
 
 
