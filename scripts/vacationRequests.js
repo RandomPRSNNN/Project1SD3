@@ -1,5 +1,6 @@
 //DOM elements
 const vacationList = document.querySelector('.vacationList');
+const vacationPending = document.querySelector('.vacationPending');
 
 //create vacation request
 const requestVacation = document.querySelector('#create-vacation');
@@ -24,6 +25,8 @@ requestVacation.addEventListener('submit', (e) => {
 
 //setup task list
 const setupVacationRequests = (data) => {
+    var pending = 0;
+
     if (data.length) {
         let html = '';
         data.forEach(doc => {
@@ -42,15 +45,26 @@ const setupVacationRequests = (data) => {
               <div class="right-align">
               <div class="admin">
                    <a class="waves-effect waves-light btn-small green admin" onclick="approveVacation('${docID}')">Approve</a>
-                   <a class="waves-effect waves-light btn-small red admin" onclick="denyVacation('${docID}')">Deny</a>
+                   <a class="waves-effect waves-light btn-small orange admin" onclick="denyVacation('${docID}')">Deny</a>
+                   <a class="waves-effect waves-light btn-small red admin" onclick=removeVacationRequest('${docID}')>Remove</a>
               </div>
               </div>
               </div>
               </li>`;
             html += li;
+
+            //count number of pending requests
+            if(vacation.approved === 'Pending'){
+                pending++;
+            }
+
+
         });
+
+        vacationPending.innerHTML = pending;
         vacationList.innerHTML = html;
     } else {
+        vacationList.innerHTML = '';
     }
 
     setUpButtons();
@@ -72,4 +86,12 @@ function denyVacation(docID) {
     });
 }
 
+//remove request
+function removeVacationRequest(docID) {
+    db.collection("vacationRequests").doc(docID).delete().then(() => {
+        console.log("Request deleted");
+    }).catch((error) => {
+        console.log(error);
+    });
+}
 

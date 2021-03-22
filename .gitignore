@@ -1,3 +1,4 @@
 .firebase/
 .idea/
 functions/node_modules/
+*.log

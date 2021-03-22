@@ -46,9 +46,6 @@
     </div>
 </div>
 
-
-
-
 <!-- SIGN UP MODAL -->
 <div id="modal-signup" class="modal">
     <div class="modal-content">
@@ -84,13 +81,6 @@
             <button class="btn green">Login</button>
             <p class="error red-text center-align"></p>
         </form>
-    </div>
-</div>
-
-<div class="logged-in" style="display: none;">
-    <div class="admin">
-        <!-- VACATION LIST! -->
-        <ul class="collapsible expandable vacationList"></ul>
     </div>
 </div>
 
@@ -284,6 +274,27 @@
                         </div>
                         <!-- TIMETABLES LISTED -->
                         <ul class="collapsible expandable listTimetables"></ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- VACATION REQUEST DISPLAY -->
+<div class="row center-align logged-in">
+    <div class="container center-align">
+        <div class="col s12">
+            <ul class="collapsible expandable">
+                <li>
+                    <div class="collapsible-header grey lighten-4">Vacation requests
+                        <span class="new badge vacationPending orange" data-badge-caption="Pending requests">0</span>
+                    </div>
+                    <div class="collapsible-body white">
+                        <div class="admin">
+                            <!-- VACATION LIST! -->
+                            <ul class="collapsible expandable vacationList"></ul>
+                        </div>
                     </div>
                 </li>
             </ul>
