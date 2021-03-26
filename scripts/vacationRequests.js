@@ -26,6 +26,7 @@ requestVacation.addEventListener('submit', (e) => {
 //setup task list
 const setupVacationRequests = (data) => {
     var pending = 0;
+    var pendingNotification;
 
     if (data.length) {
         let html = '';
@@ -33,8 +34,18 @@ const setupVacationRequests = (data) => {
             const vacation = doc.data();
             let docID = doc.id;
 
+            //Assign a notification for pending requests
+            if(vacation.approved === "Pending"){
+                pendingNotification = `
+                    <i class="material-icons icon-blue">warning</i>
+                `;
+            }else{
+                pendingNotification = '';
+            }
+
+
             var li = `<li>
-              <div class="collapsible-header grey lighten-4">Request from ${vacation.name} </div>
+              <div class="collapsible-header grey lighten-4">Request from ${vacation.name} <span class="badge">${pendingNotification}</span></div>
               <div class="collapsible-body left-align white">
               <b>Name:</b> ${vacation.name} <br>
               <b>Date beginning:</b> ${vacation.date} <br>
@@ -57,8 +68,6 @@ const setupVacationRequests = (data) => {
             if(vacation.approved === 'Pending'){
                 pending++;
             }
-
-
         });
 
         vacationPending.innerHTML = pending;

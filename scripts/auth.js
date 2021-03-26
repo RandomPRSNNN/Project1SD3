@@ -18,6 +18,10 @@ auth.onAuthStateChanged(user => {
             setupVacationRequests(snapshot.docs);
             setupUI(user);
         }, err => console.log(err.message));
+        db.collection('employeeInfo').orderBy('name', 'asc').onSnapshot(snapshot => {
+            setupEmployeeInfo(snapshot.docs);
+            setupUI(user);
+        }, err => console.log(err.message));
     } else {
         setupUI();
     }

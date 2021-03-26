@@ -3,15 +3,22 @@ service cloud.firestore {
     match /databases/{database}/documents {
 
         //allow read for anyone ADMIN only write
-        match /{document=**} {
+        match /taskList/{documents=**} {
+            allow read: if request.auth.token.admin == true;
+            allow write: if request.auth.token.admin == true;
+        }
+        match /timetableTEST/{documents=**} {
             allow read: if request.auth.uid != null;
             allow write: if request.auth.token.admin == true;
         }
-        //match logged in user doc in users collection
-        match /vactionRequests{
-            allow create: if request.auth.id != null;
-            allow read: if request.auth.id != null;
-        }
 
+        match /vacationRequests/{documents=**} {
+            allow read: if request.auth.uid != null;
+            allow write: if request.auth.uid != null;
+        }
+        match /employeeInfo/{documents=**} {
+            allow read: if request.auth.token.admin == true;
+            allow write: if request.auth.token.admin == true;
+        }
     }
 }

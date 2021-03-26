@@ -50,6 +50,7 @@ const setupTaskList = (data) => {
         });
         taskList.innerHTML = html;
     } else {
+        taskList.innerHTML = "No Tasks"
     }
 
     setUpButtons();

@@ -61,6 +61,7 @@ function setUpButtons() {
   var instances = M.Datepicker.init(elems, {
     firstDay: 1,
     format: 'dd mmmm, yyyy',
+    yearRange: [1955,2025],
   });
 
 

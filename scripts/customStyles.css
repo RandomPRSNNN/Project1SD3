@@ -1,0 +1,19 @@
+/* Change icon colour for pending vacation requests */
+i.icon-blue {
+    color: #ff5252;
+}
+
+/* HIDE SCROLL BARS + TIMETABLE MODAL CHANGE BEHAVIOUR */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.modal-t {
+    top: 0px !important;
+    max-height: 100% !important;
+}
+
+body {
+    background-image: url("/img/pattern4.png");
+}

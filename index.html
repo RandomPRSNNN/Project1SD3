@@ -1,13 +1,14 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Management</title>
     <link rel="shortcut icon" href="img/logo-noText.svg">
 </head>
 <body class="grey lighten-3">
 
 <!-- NAVBAR -->
-<nav class="grey lighten-4">
+<nav class="grey lighten-4 hoverable">
     <div class="nav-wrapper container">
         <a class="brand-logo">
             <img src="img/logo.svg" style="width: 180px; margin-top: 10px;">
@@ -23,14 +24,11 @@
                 <a class="grey-text modal-trigger admin" data-target="modal-make-admin">Assign Admin</a>
             </li>
             <li class="logged-in" style="display: none;">
-                <a class="grey-text" id="logout">Logout</a>
-            </li>
-
-            <li class="logged-in" style="display: none;">
                 <a class="grey-text modal-trigger" data-target="modal-vacation">Request Vacation</a>
             </li>
-
-            </span>
+            <li class="logged-in" style="display: none;">
+                <a class="grey-text" id="logout">Logout</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -124,6 +122,44 @@
                 <label for="content">Task description</label>
             </div>
             <button class="btn yellow darken-2 z-depth-0">Create</button>
+        </form>
+    </div>
+</div>
+
+<!-- ADD NEW EMPLOYEE INFO MODAL-->
+<div id="modal-employees" class="modal modal-t">
+    <div class="modal-content">
+        <h5>Employee Information</h5><br/>
+        <form id="create-employees">
+            <div class="input-field">
+                <input type="text" id="empName">
+                <label for="title">Employee Name</label>
+            </div>
+            <div>
+                <input type="text" class="datepickerNotMondays" id="empDOB"
+                       placeholder="Date of birth, click to select" required>
+            </div>
+            <div class="input-field">
+                <textarea id="empAddress" class="materialize-textarea" required></textarea>
+                <label for="content">Employee address</label>
+            </div>
+            <div class="input-field">
+                <input type="email" id="empEmail" required>
+                <label for="title">Email</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="empNumber" required>
+                <label for="title">Contact number</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="empContactEmergencyName" required>
+                <label for="title">Emergency contact name</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="empContactEmergency" required>
+                <label for="title">Emergency contact number</label>
+            </div>
+            <a type="submit" class="btn-small green modal-close" onclick="createNewEmployeeInfo(event)">Save</a>
         </form>
     </div>
 </div>
@@ -245,13 +281,13 @@
             <div class="right-align"><a href="#" class="modal-trigger waves-effect waves-light btn-small green"
                                         data-target="modal-task">New Task</a></div>
             <!-- TASK LIST -->
-            <ul class="collapsible expandable taskList"></ul>
+            <ul class="collapsible expandable taskList hoverable"></ul>
         </div>
     </div>
     <!-- GRAPH -->
     <div class="col s6 admin" style="display: none;">
         <div class="container" style="margin-top: 40px;">
-            <div class="card center-align">
+            <div class="card center-align hoverable">
                 <div id="curve_chart"></div>
             </div>
         </div>
@@ -262,7 +298,7 @@
 <div class="row center-align logged-in">
     <div class="container center-align">
         <div class="col s12">
-            <ul class="collapsible expandable">
+            <ul class="collapsible expandable hoverable popout">
                 <li>
                     <div class="collapsible-header grey lighten-4">Timetables</div>
                     <div class="collapsible-body white">
@@ -270,7 +306,7 @@
                             <!-- TIMETABLE BUTTON -->
                             <div class="admin" style="display: none;"><a
                                     class="modal-trigger waves-effect waves-light btn-small green"
-                                    data-target="modal-timetable">New Timetable</a></div>
+                                    data-target="modal-timetable">Create Timetable</a></div>
                         </div>
                         <!-- TIMETABLES LISTED -->
                         <ul class="collapsible expandable listTimetables"></ul>
@@ -281,40 +317,57 @@
     </div>
 </div>
 
-<!-- VACATION REQUEST DISPLAY -->
-<div class="row center-align logged-in">
-    <div class="container center-align">
-        <div class="col s12">
-            <ul class="collapsible expandable">
-                <li>
-                    <div class="collapsible-header grey lighten-4">Vacation requests
-                        <span class="new badge vacationPending orange" data-badge-caption="Pending requests">0</span>
-                    </div>
-                    <div class="collapsible-body white">
-                        <div class="admin">
-                            <!-- VACATION LIST! -->
-                            <ul class="collapsible expandable vacationList"></ul>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+<!-- VACATION + EMPLOYEE DISPLAY -->
+<div class="row logged-in admin">
+    <div class="col s6">
+        <!-- VACATION REQUEST DISPLAY -->
+        <div class="row logged-in">
+            <div class="admin">
+                <div class="col s12">
+                    <ul class="collapsible expandable hoverable">
+                        <li>
+                            <div class="collapsible-header grey lighten-4">Vacation requests
+                                <span class="new badge vacationPending orange"
+                                      data-badge-caption="Pending requests">0</span>
+                            </div>
+                            <div class="collapsible-body white">
+                                <div class="admin">
+                                    <!-- VACATION LIST! -->
+                                    <ul class="collapsible expandable vacationList"></ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s6">
+        <!-- VACATION REQUEST DISPLAY -->
+        <div class="row logged-in">
+            <div class="admin">
+                <div class="col s12">
+                    <ul class="collapsible expandable hoverable">
+                        <li>
+                            <div class="collapsible-header grey lighten-4">Employee Information
+                            </div>
+                            <div class="collapsible-body white">
+                                <div class="admin">
+                                    <div class="right-align"><a class="btn-small green modal-trigger "
+                                                                data-target="modal-employees">Add New</a></div>
+                                    <!-- EMPLOYEE LIST -->
+                                    <ul class="collapsible employeeList"></ul>
+
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<!-- HIDE SCROLL BARS + TIMETABLE MODAL CHANGE BEHAVIOUR-->
-<style>
-    ::-webkit-scrollbar {
-        width: 0px;
-        background: transparent; /* make scrollbar transparent */
-    }
-
-    .modal-t {
-        top: 0px !important;
-        max-height: 100% !important;
-    }
-</style>
-
 
 <!-- GOOGLE CHART -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -343,14 +396,16 @@
     }
 </script>
 
-<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-functions.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-functions.js"></script>
 <script src="scripts/firebaseConfig.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="scripts/auth.js"></script>
+<link rel="stylesheet" href="scripts/customStyles.css">
 <script src="scripts/timetable.js"></script>
+<script src="scripts/employeeInfo.js"></script>
 <script src="scripts/taskList.js"></script>
 <script src="scripts/index.js"></script>
 <script src="scripts/vacationRequests.js"></script>
