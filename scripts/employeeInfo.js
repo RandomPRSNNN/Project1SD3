@@ -21,33 +21,62 @@ function createNewEmployeeInfo(e) {
     }).catch(err => {
         console.log(err.message);
     });
+    M.toast({html: 'New employee data saved'});
+
 }
 
 //setup task list
 const setupEmployeeInfo = (data) => {
     if (data.length) {
         let html = '';
+
         data.forEach(doc => {
             const employee = doc.data();
             let docID = doc.id;
 
-            var li = `<li>
+            let li = `<li>
               <div class="collapsible-header grey lighten-4"> ${employee.name} </div>
-              <div class="collapsible-body left-align white"> 
-                    <b>Date of birth: </b>${employee.DOB}<br>
-                    <b>Address: </b>${employee.address}<br>
-                    <b>Email address: </b>${employee.email}<br>
-                    <b>Employee phone number: </b>${employee.phoneNumber}<br>
-                    <b>Emergency contact name: </b>${employee.emergencyContactName}<br>
-                    <b>Emergency contact number: </b>${employee.emergencyContactNumber}<br>
+              <div class="collapsible-body left-align white">
+                    <table class="highlight">
+                        <tbody>
+                        <tr>
+                            <td><b>Name</b></td>
+                            <td>${employee.name}</td>
+                        </tr>
+                        <tr>
+                            <td><b>DOB</b></td>
+                            <td>${employee.DOB}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Address</b></td>
+                            <td>${employee.address}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Email</b></td>
+                            <td>${employee.email}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Phone Number</b></td>
+                            <td>${employee.phoneNumber}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Emergency Contact</b></td>
+                            <td>${employee.emergencyContactName}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Emergency Contact Number</b></td>
+                            <td>${employee.emergencyContactNumber}</td>
+                        </tr>
+                        </tbody></table><br>
+              
               <div class="right-align">
               <a class='dropdown-trigger waves-effect waves-light btn-small red' data-target='${docID}DROP'>Update</a>
               </div>
               </li>`;
 
 
-            var modal =
-                        `<!-- UPDATE EMPLOYEE INFO MODAL-->
+            let modal =
+                `<!-- UPDATE EMPLOYEE INFO MODAL-->
                 <div id="${docID}+modal-employees" class="modal modal-t">
                     <div class="modal-content">
                         <h5>Employee Information</h5><br/>
@@ -71,7 +100,7 @@ const setupEmployeeInfo = (data) => {
                     </div>
                 </div>`
 
-            var button = `
+            let button = `
             <!-- Dropdown Structure -->
             <div>
             <ul id='${docID}DROP' class='dropdown-content'>
@@ -95,24 +124,27 @@ function deleteEmployeeInfo(docID) {
         console.log("Employee info deleted");
     }).catch((error) => {
         console.log(error);
-    })
-}
+    });
+    M.toast({html: 'Employee data deleted'});
 
+}
 
 //update
 function updateEmployeeInfo(docID) {
     db.collection("employeeInfo").doc(docID).update({
         name: document.getElementById(docID + "+empName").value,
-        DOB: document.getElementById(docID+"+empDOB").value,
-        address: document.getElementById(docID+"+empAddress").value,
-        email: document.getElementById(docID+"+empEmail").value,
-        phoneNumber: document.getElementById(docID+"+empNumber").value,
-        emergencyContactName: document.getElementById(docID+"+empContactEmergencyName").value,
-        emergencyContactNumber: document.getElementById(docID+"+empContactEmergency").value
+        DOB: document.getElementById(docID + "+empDOB").value,
+        address: document.getElementById(docID + "+empAddress").value,
+        email: document.getElementById(docID + "+empEmail").value,
+        phoneNumber: document.getElementById(docID + "+empNumber").value,
+        emergencyContactName: document.getElementById(docID + "+empContactEmergencyName").value,
+        emergencyContactNumber: document.getElementById(docID + "+empContactEmergency").value
 
     }).then(() => {
         console.log("Employee updated info")
     }).catch((error) => {
         console.log(error);
     });
+    M.toast({html: 'Employee data updated'});
+
 }

@@ -3,8 +3,9 @@ const timetableList = document.querySelector('.listTimetables');
 
 //delete timetable
 function deleteTimetable(docID) {
-    db.collection('timetableTEST').doc(docID).delete().then(() => {
+    db.collection('timetable').doc(docID).delete().then(() => {
         console.log("Timetable deleted");
+        M.toast({html: 'Timetable deleted'});
     }).catch((error) => {
         console.log(error);
     })
@@ -13,7 +14,7 @@ function deleteTimetable(docID) {
 //create a new timetable
 function newTimetable(e) {
     e.preventDefault();
-    db.collection('timetableTEST').add({
+    db.collection('timetable').add({
         timetableName: document.getElementById("timetable-date").value,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 
@@ -82,6 +83,7 @@ function newTimetable(e) {
 
     }).then(() => {
         console.log("Timetable saved")
+        M.toast({html: 'Timetable created'});
         //reset form
         document.getElementById("timetable").reset();
         document.getElementById("timetable-date").value = "";
@@ -95,6 +97,7 @@ function newTimetable(e) {
 const setupTimetable = (data) => {
     if (data.length) {
         let html = '';
+        let button = '';
         data.forEach(doc => {
             const table = doc.data();
             let docID = doc.id;
@@ -197,7 +200,9 @@ const setupTimetable = (data) => {
                             <td>${table.timeSun16}</td>
                         </tr>
                         </tbody>
-                </table><br>
+                </table><br>`
+                button = `
+                
                 <div class="right-align">
                 <a class="waves-effect waves-light btn-small red"
                 onclick="deleteTimetable('${docID}')">Delete</a>
@@ -316,12 +321,17 @@ const setupTimetable = (data) => {
                     </div>
                 </div>`
 
-            html += li + modal;
+            //Display edit buttons for admins
+            if(userISAdmin === true) {
+                html += li + button + modal;
+            }else{
+                html += li
+            }
         });
         timetableList.innerHTML = html;
 
     } else {
-        timetableList.innerHTML = '';
+        timetableList.innerHTML = '<div class="center-align">No timetables</div>';
     }
 
     setUpButtons();
@@ -329,7 +339,7 @@ const setupTimetable = (data) => {
 
 //update timetable
 function updateTimetable(docID) {
-    db.collection("timetableTEST").doc(docID).update({
+    db.collection("timetable").doc(docID).update({
         timetableName: document.getElementById(docID + '+timetable-date').value,
         timeMon9: document.getElementById(docID + '+timeMon9').value,
         timeMon10: document.getElementById(docID + '+timeMon10').value,
@@ -396,6 +406,7 @@ function updateTimetable(docID) {
 
     }).then(() => {
         console.log("Timetable updated.")
+        M.toast({html: 'Timetable updated'});
     }).catch((error) => {
         console.log(error);
     });

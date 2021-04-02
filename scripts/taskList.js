@@ -9,12 +9,14 @@ function updateTaskListItem(docID, title, content) {
     }).catch((error) =>{
         console.log(error);
     });
+    M.toast({html: 'Task updated'});
 }
 
 //delete task fields
 function deleteTaskListItem(docID) {
     db.collection("taskList").doc(docID).delete().then(() => {
         console.log("Task deleted");
+        M.toast({html: 'Task deleted'});
     }).catch((error) => {
         console.log(error);
     });
@@ -69,6 +71,8 @@ createTask.addEventListener('submit', (e) => {
         const modal = document.querySelector('#modal-task');
         M.Modal.getInstance(modal).close();
         createTask.reset();
+        //display toast
+        M.toast({html: 'Task created'});
     }).catch(err => {
         console.log(err.message);
     });

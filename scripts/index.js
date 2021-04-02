@@ -3,10 +3,12 @@ const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const adminItems = document.querySelectorAll('.admin');
 
+
 const setupUI = (user) => {
   if (user) {
     if (user.admin) {
       adminItems.forEach(item => item.style.display = 'block');
+      userISAdmin = true;
     }
     // toggle user UI elements
     loggedInLinks.forEach(item => item.style.display = 'block');
@@ -16,9 +18,10 @@ const setupUI = (user) => {
     adminItems.forEach(item => item.style.display = 'none');
     loggedInLinks.forEach(item => item.style.display = 'none');
     loggedOutLinks.forEach(item => item.style.display = 'block');
+    userISAdmin = false;
   }
   setUpButtons();
-  console.log("Setting UP UI (hiding)")
+  console.log("Setting UP UI (hiding)");
 };
 
 
@@ -74,8 +77,6 @@ function setUpButtons() {
     closeOnClick: false,
     constrainWidth: false
   });
-
-
 }
 
 

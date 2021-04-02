@@ -7,7 +7,7 @@ service cloud.firestore {
             allow read: if request.auth.token.admin == true;
             allow write: if request.auth.token.admin == true;
         }
-        match /timetableTEST/{documents=**} {
+        match /timetable/{documents=**} {
             allow read: if request.auth.uid != null;
             allow write: if request.auth.token.admin == true;
         }
@@ -19,6 +19,10 @@ service cloud.firestore {
         match /employeeInfo/{documents=**} {
             allow read: if request.auth.token.admin == true;
             allow write: if request.auth.token.admin == true;
+        }
+        match /graphData/{documents=**} {
+            allow read: if request.auth.uid != null;
+            allow write: if request.auth.uid != null;
         }
     }
 }

@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Management</title>
+    <link rel="shortcut icon" href="img/logo-noText.svg">
+</head>
+<h1 class="center-align">TEST page</h1>
+<div class="container center-align">
+    <div id="curve_chart"></div>
+    <br>
+    <form id="testForm">
+        <br>
+        <a class="waves-effect waves-red btn green" onclick="addGraphData()">Add data to graph</a>
+        <a class="waves-effect waves-red btn green" onclick="getGraphData()">Get data to graph</a>
+
+        <div class="input-field">
+            <input type="number" id="date">
+            <label for="date">Date</label>
+        </div>
+        <div class="input-field">
+            <input type="number" id="sales">
+            <label for="sales">Sales</label>
+        </div>
+        <div class="input-field">
+            <input type="number" id="expenses">
+            <label for="expenses">Expenses</label>
+        </div>
+    </form>
+    <div id="arrayContents" class="center-align"></div>
+    <div id="graphDataContents" class="center-align">HERE!</div>
+</div>
+
+<script>
+
+
+    function addGraphData() {
+        db.collection('graphData').add({
+            date: document.getElementById('date').value,
+            sales: document.getElementById('sales').value,
+            expenses: document.getElementById('expenses').value,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            M.toast({html: 'Data added to graph'});
+            document.getElementById('testForm').reset();
+        }).catch(err => {
+            console.log(err.message);
+        });
+
+        drawChart();
+    }
+
+    async function getGraphData() {
+        let html = [['Year', 'Sales', 'Expenses']];
+        const snapshot = await db.collection('graphData').orderBy('timestamp', 'asc').get();
+
+        snapshot.docs.map(doc =>
+            html.push([doc.data().date, parseInt(doc.data().sales), parseInt(doc.data().expenses)])
+        )
+
+        return html;
+    }
+
+</script>
+
+<!-- GOOGLE CHART -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    async function drawChart() {
+
+        let array = await getGraphData();
+
+        var data = google.visualization.arrayToDataTable(
+            array
+        );
+
+        var options = {
+            title: 'Company Performance',
+            curveType: 'function',
+            legend: {position: 'bottom'}
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-functions.js"></script>
+<script src="scripts/firebaseConfig.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<link rel="stylesheet" href="scripts/customStyles.css">
+</body>
+</html>
