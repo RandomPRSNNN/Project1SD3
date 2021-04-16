@@ -1,8 +1,8 @@
 function addGraphData() {
     db.collection('graphData').add({
         date: document.getElementById('date').value,
-        sales: document.getElementById('sales').value,
-        expenses: document.getElementById('expenses').value,
+        sales: parseInt(document.getElementById('sales').value), //parse - searching
+        expenses: parseInt(document.getElementById('expenses').value),
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
         M.toast({html: 'Data added to graph'});
@@ -13,6 +13,31 @@ function addGraphData() {
 
     drawChart();
 }
+
+
+async function searchingData(item, number, sign){
+    console.log(item);
+    console.log(number);
+    console.log(sign);
+
+    let html = '';
+    //TESTING queries
+    await db.collection('graphData').where(item.toLowerCase(), sign, parseInt(number)).get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+            console.log("GOTTEN " + doc.data().date + ": s" + doc.data().sales + " e" + doc.data().expenses);
+            html += doc.id + "~ " + doc.data().date+ " - " + doc.data().sales + " " + doc.data().expenses + `<br>`;
+        })
+    }).catch(err => {
+        console.log(err.message);
+    });
+
+    document.querySelector('#displayGottenGraphData').innerHTML = html;
+
+}
+
+
+
+
 
 async function getGraphData() {
     let html = [['Year', 'Sales', 'Expenses']];
@@ -28,6 +53,7 @@ async function getGraphData() {
 /*CHART IMPORT*/
 google.charts.load('current', {'packages': ['corechart']});
 google.charts.setOnLoadCallback(drawChart);
+
 
 async function drawChart() {
 
@@ -51,9 +77,8 @@ async function drawChart() {
     };
 
 
-
-  /*  legend: {position: 'right'},
-    chartArea:{width:"80%", height: "80%"}*/
+    /*  legend: {position: 'right'},
+      chartArea:{width:"80%", height: "80%"}*/
 
 
     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));

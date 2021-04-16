@@ -116,45 +116,78 @@
     </div>
 </div>
 
-
 <!-- GRAPH MODAL -->
 <div id="modal-graph" class="modal modal-graph">
     <div class="modal-content white">
-        <div class="">
-            <div id="curve_chart_large"></div>
+        <!--DISPLAY GRAPH-->
+        <div id="curve_chart_large"></div>
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header grey lighten-4">Add Data to graph</div>
+                <div class="collapsible-body white">
+
+                    <form id="addGraphForm">
+                        <br>
+                        <div class="input-field">
+                            <input type="number" id="date">
+                            <label for="date">Date</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" id="sales">
+                            <label for="sales">Sales</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" id="expenses">
+                            <label for="expenses">Expenses</label>
+                        </div>
+                        <a class="waves-effect waves-red btn green" onclick="addGraphData()">Add data to graph</a>
+                    </form>
+                </div>
+            </li>
+
+            <li>
+                <div class="collapsible-header grey lighten-4">Get data from graph</div>
+                <div class="collapsible-body white">
+
+                    <form id="getGraphForm">
+                        <br>
+                        <div class="input-field">
+                            <input type="text" id="itemGet">
+                            <label for="itemGet">Item</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" id="numberGet">
+                            <label for="numberGet">Number</label>
+                        </div>
+
+                        <div class="input-field">
+                            <select id="optionSearch">
+                                <option value="" disabled selected>Choose searching range</option>
+                                <option value=">">Greater than: ></option>
+                                <option value="<">Less than: <</option>
+                                <option value="==">Equal to: ==</option>
+                            </select>
+                            <label>Searching options</label>
+                        </div>
 
 
-            <ul class="collapsible">
-                <li>
-                    <div class="collapsible-header grey lighten-4">Add Data to graph</div>
-                    <div class="collapsible-body white">
+                        <a class="waves-effect waves-red btn green" onclick="searchingData(
+                            document.getElementById('itemGet').value,
+                            document.getElementById('numberGet').value,
+                            String(document.getElementById('optionSearch').value)
+                        )">Get graph data</a>
+                    </form>
+                    <div id="displayGottenGraphData"></div>
+                </div>
+            </li>
 
-                        <form id="addGraphForm">
-                            <br>
-                            <div class="input-field">
-                                <input type="number" id="date">
-                                <label for="date">Date</label>
-                            </div>
-                            <div class="input-field">
-                                <input type="number" id="sales">
-                                <label for="sales">Sales</label>
-                            </div>
-                            <div class="input-field">
-                                <input type="number" id="expenses">
-                                <label for="expenses">Expenses</label>
-                            </div>
-                            <a class="waves-effect waves-red btn green" onclick="addGraphData()">Add data to graph</a>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+
+        </ul>
     </div>
 </div>
 
-
 <!--LOGIN TO CONTINUE-->
-<div id="logToContinue" class="center-align"></div>
+<div id="logToContinue" class="center-align logged-out" style="display: none;"></div>
 
 <!-- CREATE TASK MODAL -->
 <div id="modal-task" class="modal">
@@ -340,7 +373,6 @@
                 <div id="curve_chart"></div>
                 <br>
             </div>
-
         </div>
     </div>
 </div>
@@ -418,6 +450,9 @@
     </div>
 </div>
 
+<!--SPACING-->
+<div style="margin-top: 500px;"></div>
+
 <!-- GOOGLE CHART -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -435,5 +470,6 @@
 <script src="scripts/index.js"></script>
 <script src="scripts/vacationRequests.js"></script>
 <script src="scripts/googleChart.js"></script>
+<script src="scripts/reports.js"></script>
 </body>
 </html>

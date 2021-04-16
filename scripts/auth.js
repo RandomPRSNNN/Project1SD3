@@ -8,6 +8,7 @@ auth.onAuthStateChanged(user => {
         user.getIdTokenResult().then(idTokenResult => {
             user.admin = idTokenResult.claims.admin;
             setupUI(user);
+            drawChart();
         });
         db.collection('taskList').orderBy('timestamp', 'asc').onSnapshot(snapshot => {
             setupTaskList(snapshot.docs);

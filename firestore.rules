@@ -21,8 +21,8 @@ service cloud.firestore {
             allow write: if request.auth.token.admin == true;
         }
         match /graphData/{documents=**} {
-            allow read: if request.auth.uid != null;
-            allow write: if request.auth.uid != null;
+            allow read: if request.auth.token.admin == true;
+            allow write: if request.auth.token.admin == true;
         }
     }
 }

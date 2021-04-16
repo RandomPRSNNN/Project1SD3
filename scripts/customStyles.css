@@ -28,3 +28,22 @@ body {
     width: 90% !important;
     max-height: 100% !important;
 }
+
+#generate-report {
+    top: 5px !important;
+    width: 90% !important;
+    max-height: 100% !important;
+}
+
+#reportsOverall{
+    top: 0px !important;
+    width: 95% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+
+}
+
+.smallText{
+    font-size: small;
+}
+

@@ -77,6 +77,16 @@ function setUpButtons() {
     closeOnClick: false,
     constrainWidth: false
   });
+
+
+  /*SELECTORS*/
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems);
+
+
+//tooltipped button
+  var elems = document.querySelectorAll('.tooltipped');
+  var instances = M.Tooltip.init(elems);
 }
 
 
