@@ -3,7 +3,7 @@ const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const adminItems = document.querySelectorAll('.admin');
 
-
+//set up the elements that are shown for each view
 const setupUI = (user) => {
   if (user) {
     if (user.admin) {
@@ -24,30 +24,21 @@ const setupUI = (user) => {
   console.log("Setting UP UI (hiding)");
 };
 
-
-//setup materialize
-document.addEventListener('DOMContentLoaded', function() {
-  var modals = document.querySelectorAll('.modal');
-  M.Modal.init(modals);
-
-  var items = document.querySelectorAll('.collapsible');
-  M.Collapsible.init(items);
-
-});
-
-
-//task list buttons redraw
+//MaterializeCSS component setup
 function setUpButtons() {
-  var modals = document.querySelectorAll('.modal');
+  //MODALS
+  let modals = document.querySelectorAll('.modal');
   M.Modal.init(modals);
 
-  var elem = document.querySelectorAll('.collapsible.expandable');
-  var instance = M.Collapsible.init(elem, {
+  //EXPANDABLE
+  let expandable = document.querySelectorAll('.collapsible.expandable');
+  var instance = M.Collapsible.init(expandable, {
     accordion: false
   });
 
-  var elems = document.querySelectorAll('.datepicker');
-  var instances = M.Datepicker.init(elems, {
+  //DATEPICKER - mondays
+  let datepicker = document.querySelectorAll('.datepicker');
+  var instances = M.Datepicker.init(datepicker, {
     firstDay: 1,
     format: 'dd mmmm, yyyy',
     //only mondays
@@ -59,39 +50,35 @@ function setUpButtons() {
     }
   });
 
-
-  var elems = document.querySelectorAll('.datepickerNotMondays');
-  var instances = M.Datepicker.init(elems, {
+  //Datepicker - all days
+  let datepickerAllDays = document.querySelectorAll('.datepickerNotMondays');
+  var instances = M.Datepicker.init(datepickerAllDays, {
     firstDay: 1,
     format: 'dd mmmm, yyyy',
     yearRange: [1955,2025],
   });
 
-
-
-
-  console.log("Setting up  mCSS buttons");
-  //dropdown button setup
-  var elements = document.querySelectorAll('.dropdown-trigger');
-  var instances = M.Dropdown.init(elements, {
+  //DROPDOWN BUTTONS
+  let dropdownButtons = document.querySelectorAll('.dropdown-trigger');
+  var instances = M.Dropdown.init(dropdownButtons, {
     closeOnClick: false,
     constrainWidth: false
   });
 
 
-  /*SELECTORS*/
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems);
+  //SELECTORS - multivalued
+  let selectors = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(selectors);
 
+  //TOOLTIPS
+  let tooltips = document.querySelectorAll('.tooltipped');
+  var instances = M.Tooltip.init(tooltips);
 
-//tooltipped button
-  var elems = document.querySelectorAll('.tooltipped');
-  var instances = M.Tooltip.init(elems);
+  console.log("Setting up  mCSS buttons");
 }
 
-
-//dropdown button setup
+//SETUP MATERIALIZE - once webpage done loading
 document.addEventListener('DOMContentLoaded', function () {
   setUpButtons();
-  M.AutoInit();
+  M.AutoInit(undefined);
 });

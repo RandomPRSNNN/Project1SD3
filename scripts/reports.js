@@ -2,7 +2,7 @@
 const reportListings = document.querySelector('.reportListings');
 const reportTotals = document.querySelector('#donutDisplayOverall');
 
-//Generate report
+//generate report
 const reportForm = document.querySelector('#report-form');
 reportForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -17,10 +17,17 @@ reportForm.addEventListener('submit', (e) => {
         expensesRent: parseInt(document.getElementById('reportRent').value),
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
-        //close the create modal & reset form
-        //const modal = document.querySelector('#generate-report');
-        //M.Modal.getInstance(modal).close();
-        //reset form
+        let date = new Date(document.getElementById('reportDate').value).getFullYear();
+        let sales = parseInt(document.getElementById('reportStock').value) +
+            parseInt(document.getElementById('reportProduce').value);
+        let expenses = parseInt(document.getElementById('reportOrders').value) +
+            parseInt(document.getElementById('reportBills').value) +
+            parseInt(document.getElementById('reportMaintenance').value) +
+            parseInt(document.getElementById('reportRent').value);
+        addToYearlyGraph(date, sales, expenses);
+        //reset form and close modal
+        const modal = document.querySelector('#generate-report-modal');
+        M.Modal.getInstance(modal).close();
         reportForm.reset();
         document.getElementById('reportDate').value = "";
         //display toast
@@ -30,16 +37,47 @@ reportForm.addEventListener('submit', (e) => {
     });
 });
 
+async function addToYearlyGraph(date, sales, expenses) {
+    await db.collection('graphData').where("date", "==", date.toString()).get().then((snapshot) => {
+        if (snapshot.empty) {
+            db.collection('graphData').add({
+                date: date.toString(),
+                sales: parseInt(sales), //parse - searching
+                expenses: parseInt(expenses),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                console.log("No data found, created a new document")
+            })
+        } else {
+            snapshot.docs.forEach(doc => {
+                const docID = doc.id;
+                const gottenExpenses = doc.data().expenses;
+                const gottenSales = doc.data().expenses;
+
+                db.collection("graphData").doc(docID).update({
+                    sales: gottenSales + sales,
+                    expenses: gottenExpenses + expenses
+                });
+            });
+        }
+    }).then(() => {
+        drawChart();
+    })
+}
+
+
 function leapYearCheck(year) {
     //remove all chars other than digits
     let year2 = year.replace(/^\D+/g, '');
-
     //return boolean if year is leap
     return ((year2 % 4 === 0) && (year2 % 100 !== 0)) || (year2 % 400 === 0);
 }
 
 async function searchReports(month, year) {
-//define date search range
+    //display expandable elements
+    document.getElementById("reportsListed").style.display = "block";
+
+    //define date search range
     let endDateSearch = '';
     if (month === "" || year === "") {
         M.toast({html: 'Please select a valid month and year'});
@@ -132,8 +170,8 @@ async function searchReports(month, year) {
                         </tr>
                         <tr>
                             <td><i>Expense Total</i></td>
-                            <td>${report.expensesBills + report.expensesDeliveries + 
-                                  report.expensesMaintenance + report.expensesRent}</td>
+                            <td>${report.expensesBills + report.expensesDeliveries +
+                                report.expensesMaintenance + report.expensesRent}</td>
                         </tr>
                         </tbody></table>
                     <br>    
@@ -154,16 +192,15 @@ async function searchReports(month, year) {
                             <td>${report.salesProduce + report.salesStock}</td>
                         </tr>
                         </tbody></table>
-                        
                         <br><br>
-                        
                     <table class="highlight smallText">
                     <tbody>
                     <div class="divider"></div>
                     <tr>
                         <td><b>Profit</b></td>
                          <td>${(report.salesProduce + report.salesStock) - (report.expensesBills +
-                                report.expensesDeliveries + report.expensesMaintenance + report.expensesRent)}</td>
+                                report.expensesDeliveries + report.expensesMaintenance + 
+                                report.expensesRent)}</td>
                         </tr>
                         </tbody>
                         </table><br>
@@ -171,8 +208,6 @@ async function searchReports(month, year) {
                          data-tooltip="This will perminently delete the report, and cannot be recovered"
                          onclick="deleteReport('${docID}')">Delete</a></div>
                         <br>
-                        
-                        
               </li>`;
             pushHTML += li;
         });
@@ -208,6 +243,7 @@ async function searchReports(month, year) {
          </tbody>
      </table>`
 
+
     //display data if there are values
     if (bills !== 0 && deliveries !== 0 && maintenance !== 0 && rent !== 0) {
         array.push(["Bills", parseInt(bills)]);
@@ -218,7 +254,7 @@ async function searchReports(month, year) {
         pushHTML = 'No data';
         displayTotals = '';
     }
-    //list items
+    //list items on page
     reportListings.innerHTML = pushHTML;
     reportTotals.innerHTML = displayTotals;
 
@@ -226,17 +262,15 @@ async function searchReports(month, year) {
     array.push(title);
     setUpButtons();
     return array;
-
 }
 
-//delete
 function deleteReport(docID) {
     db.collection('reports').doc(docID).delete().then(() => {
         console.log("Report deleted");
         M.toast({html: 'Report deleted'}),
-        //redraw and update reports
-        drawChartPie(document.getElementById('searchMonthSelector').value,
-                      document.getElementById('searchYearSelector').value)
+            //redraw and update reports
+            drawChartPie(document.getElementById('searchMonthSelector').value,
+                document.getElementById('searchYearSelector').value)
     }).catch((error) => {
         console.log(error);
     })
@@ -244,9 +278,7 @@ function deleteReport(docID) {
 
 google.charts.load("current", {packages: ["corechart"]});
 
-//google.charts.setOnLoadCallback(drawChartPie);
 async function drawChartPie(month, year) {
-
     //get array and get the title (last element in array)
     let array = await searchReports(month, year), [title] = array.slice(-1);
     //remove title
@@ -255,11 +287,45 @@ async function drawChartPie(month, year) {
     let data = google.visualization.arrayToDataTable(array);
 
     let options = {
-        title: title,
+        title: title + " Expenses",
         pieHole: 0.4,
         chartArea: {'width': '95%', 'height': '90%'}
     };
 
     let chart = new google.visualization.PieChart(document.getElementById('donutchart'));
     chart.draw(data, options);
+}
+
+
+async function getGraphData() {
+    let html = [['Year', 'Sales', 'Expenses']];
+    const snapshot = await db.collection('graphData').orderBy('date', 'asc').get();
+
+    snapshot.docs.map(doc =>
+        html.push([doc.data().date, parseInt(doc.data().sales), parseInt(doc.data().expenses)])
+    )
+    return html;
+}
+
+/*CHART IMPORT*/
+google.charts.setOnLoadCallback(drawChart);
+
+async function drawChart() {
+    let array = await getGraphData();
+    var data = google.visualization.arrayToDataTable(array);
+    var optionsLarge = {
+        height: 600,
+        width: 1200,
+        title: 'Company Performance',
+        curveType: 'function',
+        chartArea: {
+            right: 150,
+        },
+        vAxis: {
+            scaleType: 'linear'
+        }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart_large'));
+    chart.draw(data, optionsLarge);
 }

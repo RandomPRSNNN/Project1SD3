@@ -30,7 +30,7 @@ auth.onAuthStateChanged(user => {
     } else {
         setupUI();
         //display login promp
-        loginDiv.innerHTML = "<div class=\"row center-align\" style=\"margin-top: 40px;\">\n" +
+        loginDiv.innerHTML = "<div class=\"row center-align performAnimation\" style=\"margin-top: 40px;\">\n" +
             "    <div class=\"container center-align\">\n" +
             "        <div class=\"col s6 offset-s3\">\n" +
             "            <div class=\"container\">\n" +

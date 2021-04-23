@@ -4,12 +4,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>eManage</title>
     <link rel="shortcut icon" href="img/logo-noText.svg">
+    <link rel="stylesheet" href="scripts/transitions.css">
 </head>
+<body>
 
 <!-- NAVBAR -->
 <nav class="grey lighten-4 hoverable">
-    <div class="nav-wrapper container">
-        <a class="brand-logo">
+    <div class="nav-wrapper container performAnimationFade">
+        <a class="brand-logo performAnimationFade">
             <img src="img/logo.svg" style="width: 180px; margin-top: 10px; display: none;" class="logged-in">
         </a>
         <ul class="right">
@@ -116,76 +118,6 @@
     </div>
 </div>
 
-<!-- GRAPH MODAL -->
-<div id="modal-graph" class="modal modal-graph">
-    <div class="modal-content white">
-        <!--DISPLAY GRAPH-->
-        <div id="curve_chart_large"></div>
-        <ul class="collapsible">
-            <li>
-                <div class="collapsible-header grey lighten-4">Add Data to graph</div>
-                <div class="collapsible-body white">
-
-                    <form id="addGraphForm">
-                        <br>
-                        <div class="input-field">
-                            <input type="number" id="date">
-                            <label for="date">Date</label>
-                        </div>
-                        <div class="input-field">
-                            <input type="number" id="sales">
-                            <label for="sales">Sales</label>
-                        </div>
-                        <div class="input-field">
-                            <input type="number" id="expenses">
-                            <label for="expenses">Expenses</label>
-                        </div>
-                        <a class="waves-effect waves-red btn green" onclick="addGraphData()">Add data to graph</a>
-                    </form>
-                </div>
-            </li>
-
-            <li>
-                <div class="collapsible-header grey lighten-4">Get data from graph</div>
-                <div class="collapsible-body white">
-
-                    <form id="getGraphForm">
-                        <br>
-                        <div class="input-field">
-                            <input type="text" id="itemGet">
-                            <label for="itemGet">Item</label>
-                        </div>
-                        <div class="input-field">
-                            <input type="number" id="numberGet">
-                            <label for="numberGet">Number</label>
-                        </div>
-
-                        <div class="input-field">
-                            <select id="optionSearch">
-                                <option value="" disabled selected>Choose searching range</option>
-                                <option value=">">Greater than: ></option>
-                                <option value="<">Less than: <</option>
-                                <option value="==">Equal to: ==</option>
-                            </select>
-                            <label>Searching options</label>
-                        </div>
-
-
-                        <a class="waves-effect waves-red btn green" onclick="searchingData(
-                            document.getElementById('itemGet').value,
-                            document.getElementById('numberGet').value,
-                            String(document.getElementById('optionSearch').value)
-                        )">Get graph data</a>
-                    </form>
-                    <div id="displayGottenGraphData"></div>
-                </div>
-            </li>
-
-
-        </ul>
-    </div>
-</div>
-
 <!--LOGIN TO CONTINUE-->
 <div id="logToContinue" class="center-align logged-out" style="display: none;"></div>
 
@@ -256,93 +188,95 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th>9.00</th>
-                    <th>10.00</th>
-                    <th>11.00</th>
-                    <th>12.00</th>
-                    <th>13.00</th>
-                    <th>14.00</th>
-                    <th>15.00</th>
-                    <th>16.00</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr>
-                    <td>Monday</td>
+                    <td>9.00</td>
                     <td><input type="text" id="timeMon9"></td>
-                    <td><input type="text" id="timeMon10"></td>
-                    <td><input type="text" id="timeMon11"></td>
-                    <td><input type="text" id="timeMon12"></td>
-                    <td><input type="text" id="timeMon13"></td>
-                    <td><input type="text" id="timeMon14"></td>
-                    <td><input type="text" id="timeMon15"></td>
-                    <td><input type="text" id="timeMon16"></td>
-                </tr>
-                <tr>
-                    <td>Tuesday</td>
                     <td><input type="text" id="timeTue9"></td>
-                    <td><input type="text" id="timeTue10"></td>
-                    <td><input type="text" id="timeTue11"></td>
-                    <td><input type="text" id="timeTue12"></td>
-                    <td><input type="text" id="timeTue13"></td>
-                    <td><input type="text" id="timeTue14"></td>
-                    <td><input type="text" id="timeTue15"></td>
-                    <td><input type="text" id="timeTue16"></td>
-                </tr>
-                <tr>
-                    <td>Wednesday</td>
                     <td><input type="text" id="timeWed9"></td>
-                    <td><input type="text" id="timeWed10"></td>
-                    <td><input type="text" id="timeWed11"></td>
-                    <td><input type="text" id="timeWed12"></td>
-                    <td><input type="text" id="timeWed13"></td>
-                    <td><input type="text" id="timeWed14"></td>
-                    <td><input type="text" id="timeWed15"></td>
-                    <td><input type="text" id="timeWed16"></td>
-                </tr>
-                <tr>
-                    <td>Thursday</td>
                     <td><input type="text" id="timeThu9"></td>
-                    <td><input type="text" id="timeThu10"></td>
-                    <td><input type="text" id="timeThu11"></td>
-                    <td><input type="text" id="timeThu12"></td>
-                    <td><input type="text" id="timeThu13"></td>
-                    <td><input type="text" id="timeThu14"></td>
-                    <td><input type="text" id="timeThu15"></td>
-                    <td><input type="text" id="timeThu16"></td>
-                </tr>
-                <tr>
-                    <td>Friday</td>
                     <td><input type="text" id="timeFri9"></td>
-                    <td><input type="text" id="timeFri10"></td>
-                    <td><input type="text" id="timeFri11"></td>
-                    <td><input type="text" id="timeFri12"></td>
-                    <td><input type="text" id="timeFri13"></td>
-                    <td><input type="text" id="timeFri14"></td>
-                    <td><input type="text" id="timeFri15"></td>
-                    <td><input type="text" id="timeFri16"></td>
-                </tr>
-                <tr>
-                    <td>Saturday</td>
                     <td><input type="text" id="timeSat9"></td>
-                    <td><input type="text" id="timeSat10"></td>
-                    <td><input type="text" id="timeSat11"></td>
-                    <td><input type="text" id="timeSat12"></td>
-                    <td><input type="text" id="timeSat13"></td>
-                    <td><input type="text" id="timeSat14"></td>
-                    <td><input type="text" id="timeSat15"></td>
-                    <td><input type="text" id="timeSat16"></td>
+                    <td><input type="text" id="timeSun9"></td>
                 </tr>
                 <tr>
-                    <td>Sunday</td>
-                    <td><input type="text" id="timeSun9"></td>
+                    <td>10.00</td>
+                    <td><input type="text" id="timeMon10"></td>
+                    <td><input type="text" id="timeTue10"></td>
+                    <td><input type="text" id="timeWed10"></td>
+                    <td><input type="text" id="timeThu10"></td>
+                    <td><input type="text" id="timeFri10"></td>
+                    <td><input type="text" id="timeSat10"></td>
                     <td><input type="text" id="timeSun10"></td>
+                </tr>
+                <tr>
+                    <td>11.00</td>
+                    <td><input type="text" id="timeMon11"></td>
+                    <td><input type="text" id="timeTue11"></td>
+                    <td><input type="text" id="timeWed11"></td>
+                    <td><input type="text" id="timeThu11"></td>
+                    <td><input type="text" id="timeFri11"></td>
+                    <td><input type="text" id="timeSat11"></td>
                     <td><input type="text" id="timeSun11"></td>
+                </tr>
+                <tr>
+                    <td>12.00</td>
+                    <td><input type="text" id="timeMon12"></td>
+                    <td><input type="text" id="timeTue12"></td>
+                    <td><input type="text" id="timeWed12"></td>
+                    <td><input type="text" id="timeThu12"></td>
+                    <td><input type="text" id="timeFri12"></td>
+                    <td><input type="text" id="timeSat12"></td>
                     <td><input type="text" id="timeSun12"></td>
+                </tr>
+                <tr>
+                    <td>13.00</td>
+                    <td><input type="text" id="timeMon13"></td>
+                    <td><input type="text" id="timeTue13"></td>
+                    <td><input type="text" id="timeWed13"></td>
+                    <td><input type="text" id="timeThu13"></td>
+                    <td><input type="text" id="timeFri13"></td>
+                    <td><input type="text" id="timeSat13"></td>
                     <td><input type="text" id="timeSun13"></td>
+                </tr>
+                <tr>
+                    <td>14.00</td>
+                    <td><input type="text" id="timeMon14"></td>
+                    <td><input type="text" id="timeTue14"></td>
+                    <td><input type="text" id="timeWed14"></td>
+                    <td><input type="text" id="timeThu14"></td>
+                    <td><input type="text" id="timeFri14"></td>
+                    <td><input type="text" id="timeSat14"></td>
                     <td><input type="text" id="timeSun14"></td>
+                </tr>
+                <tr>
+                    <td>15.00</td>
+                    <td><input type="text" id="timeMon15"></td>
+                    <td><input type="text" id="timeTue15"></td>
+                    <td><input type="text" id="timeWed15"></td>
+                    <td><input type="text" id="timeThu15"></td>
+                    <td><input type="text" id="timeFri15"></td>
+                    <td><input type="text" id="timeSat15"></td>
                     <td><input type="text" id="timeSun15"></td>
+                </tr>
+                <tr>
+                    <td>16.00</td>
+                    <td><input type="text" id="timeMon16"></td>
+                    <td><input type="text" id="timeTue16"></td>
+                    <td><input type="text" id="timeWed16"></td>
+                    <td><input type="text" id="timeThu16"></td>
+                    <td><input type="text" id="timeFri16"></td>
+                    <td><input type="text" id="timeSat16"></td>
                     <td><input type="text" id="timeSun16"></td>
                 </tr>
                 </tbody>
@@ -355,11 +289,11 @@
 </div>
 
 <!--TASKS + GRAPH -->
-<div class="row center-align logged-in">
+<div class="row center-align logged-in performAnimationFade">
     <div class="col s6">
         <div class="container admin" style="margin-top: 40px; display: none;">
             <!-- CREATE TASK BUTTON -->
-            <div class="right-align"><a href="#" class="modal-trigger waves-effect waves-red btn-small green"
+            <div class="right-align"><a class="modal-trigger waves-effect waves-red btn-small green"
                                         data-target="modal-task">New Task</a></div>
             <!-- TASK LIST -->
             <ul class="collapsible taskList hoverable"></ul>
@@ -369,21 +303,20 @@
     <div class="col s6 admin" style="display: none;">
         <div class="container" style="margin-top: 40px;">
             <div class="card center-align hoverable modal-trigger tooltipped" data-position="bottom"
-                 data-tooltip="Click to Expand" data-target="modal-graph">
+                 data-tooltip="Click to Expand Reports" onclick="location.href = 'reports.html';">
                 <div id="curve_chart"></div>
-                <br>
             </div>
         </div>
     </div>
 </div>
 
 <!-- TIMETABLE DISPLAY -->
-<div class="row center-align logged-in" style="display: none;">
-    <div class="container center-align">
+<div class="row center-align logged-in performAnimationFade" style="display: none;">
+    <div class="center-align">
         <div class="col s12">
-            <ul class="collapsible expandable hoverable popout">
+            <ul class="collapsible expandable hoverable">
                 <li>
-                    <div class="collapsible-header grey lighten-4">Timetables</div>
+                    <div class="collapsible-header grey lighten-4">Schedules</div>
                     <div class="collapsible-body white">
                         <div class="right-align">
                             <!-- TIMETABLE BUTTON -->
@@ -401,7 +334,7 @@
 </div>
 
 <!-- VACATION + EMPLOYEE DISPLAY -->
-<div class="row logged-in">
+<div class="row logged-in performAnimationFade">
     <div class="col s6">
         <!-- VACATION REQUEST DISPLAY -->
         <div class="row logged-in" style="display: none;">
@@ -450,12 +383,8 @@
     </div>
 </div>
 
-<!--SPACING-->
-<div style="margin-top: 500px;"></div>
-
 <!-- GOOGLE CHART -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
@@ -470,6 +399,5 @@
 <script src="scripts/index.js"></script>
 <script src="scripts/vacationRequests.js"></script>
 <script src="scripts/googleChart.js"></script>
-<script src="scripts/reports.js"></script>
 </body>
 </html>

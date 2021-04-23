@@ -108,7 +108,9 @@ const setupVacationRequests = (data) => {
                   <div class="right-align">
                        <a class="waves-effect waves-light btn-small green" onclick="approveVacation('${docID}')">Approve</a>
                        <a class="waves-effect waves-light btn-small red modal-trigger" href="#${docID}+modal-vacDeny">Deny</a>
-                       <a class="waves-effect waves-light btn-small orange" onclick=removeVacationRequest('${docID}')>Remove</a>
+                       <a class="waves-effect waves-light btn-small orange tooltipped"
+                        data-position="bottom" data-tooltip="This will remove the vacation request and cannot be recovered" 
+                        onclick=removeVacationRequest('${docID}')>Remove</a>
                   </div>
                   </div>
                   </li>`;
@@ -155,10 +157,11 @@ function approveVacation(docID) {
 function denyVacation(docID, reason) {
     db.collection("vacationRequests").doc(docID).update({
         approved: "Denied - " + reason
+    }).then(() => {
+        M.toast({html: 'Vacation request denied'});
     }).catch((error) => {
         console.log(error);
     });
-    M.toast({html: 'Vacation request denied'});
 
 }
 

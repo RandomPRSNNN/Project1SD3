@@ -3,6 +3,10 @@ i.icon-red {
     color: #ff5252;
 }
 
+i.icon-grey {
+    color: #636363;
+}
+
 /* HIDE SCROLL BARS + TIMETABLE MODAL CHANGE BEHAVIOUR */
 ::-webkit-scrollbar {
     width: 0px;
@@ -16,6 +20,8 @@ i.icon-red {
 
 body {
     background-image: url("/img/pattern4.png");
+    /*DYNAMIC SCROLLING*/
+    overflow-y: auto !important;
 }
 
 /* smaller sized modals */
@@ -23,9 +29,10 @@ body {
     width: 30% !important;
 }
 
-#modal-graph {
+#modal-graph, #generate-report-modal, #modal-timetable {
     top: 10px !important;
-    width: 90% !important;
+    bottom: 10px !important;
+    width: 99% !important;
     max-height: 100% !important;
 }
 

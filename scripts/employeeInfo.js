@@ -105,7 +105,8 @@ const setupEmployeeInfo = (data) => {
             <div>
             <ul id='${docID}DROP' class='dropdown-content'>
              <li><a class="modal-trigger" data-target="${docID}+modal-employees">Update Information</a></li>
-             <li><a onclick=deleteEmployeeInfo('${docID}')>Remove</a></li>
+             <li><a class="tooltipped" data-position="bottom" data-tooltip="This will delete the employee information and cannot be retreaved"
+                    onclick=deleteEmployeeInfo('${docID}')>Remove</a></li>
             </ul>
             </div>`;
             html += li + modal + button;

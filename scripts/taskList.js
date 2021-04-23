@@ -45,7 +45,8 @@ const setupTaskList = (data) => {
              <li><input size="60" value="${task.title}" type="text" placeholder=" Title" class="autocomplete" id="${docID}TITLE"></li>
              <li><input size="60" value="${task.content}" type="text" placeholder=" Content" class="autocomplete" id="${docID}CONTENT"></li>
              <li><a onclick=updateTaskListItem('${docID}',document.getElementById('${docID}TITLE').value,document.getElementById('${docID}CONTENT').value)>Update</a></li>
-             <li><a onclick=deleteTaskListItem('${docID}')>Delete</a></li>
+             <li><a class="tooltipped" data-position="bottom" data-tooltip="This will delete the task object and cannot be recovered"
+                onclick=deleteTaskListItem('${docID}')>Delete</a></li>
             </ul>
             </div>`;
             html += button + li;

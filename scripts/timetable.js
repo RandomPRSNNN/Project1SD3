@@ -102,7 +102,7 @@ const setupTimetable = (data) => {
             const table = doc.data();
             let docID = doc.id;
 
-            var li = `<li>
+            let li = `<li>
               <div class="collapsible-header grey lighten-4">Week beginning: ${table.timetableName}</div>
               <div class="collapsible-body left-align white">
               <table class="responsive-table centered highlight timetable">
@@ -110,93 +110,95 @@ const setupTimetable = (data) => {
                         <thead>
                         <tr>
                             <th></th>
-                            <th>9.00</th>
-                            <th>10.00</th>
-                            <th>11.00</th>
-                            <th>12.00</th>
-                            <th>13.00</th>
-                            <th>14.00</th>
-                            <th>15.00</th>
-                            <th>16.00</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
                         </tr>
                         </thead>
                 
                         <tbody>
                         <tr>
-                            <td>Monday</td>
+                            <td>9.00</td>
                             <td>${table.timeMon9}</td>
-                            <td>${table.timeMon10}</td>
-                            <td>${table.timeMon11}</td>
-                            <td>${table.timeMon12}</td>
-                            <td>${table.timeMon13}</td>
-                            <td>${table.timeMon14}</td>
-                            <td>${table.timeMon15}</td>
-                            <td>${table.timeMon16}</td>
-                        </tr>
-                        <tr>
-                            <td>Tuesday</td>
                             <td>${table.timeTue9}</td>
-                            <td>${table.timeTue10}</td>
-                            <td>${table.timeTue11}</td>
-                            <td>${table.timeTue12}</td>
-                            <td>${table.timeTue13}</td>
-                            <td>${table.timeTue14}</td>
-                            <td>${table.timeTue15}</td>
-                            <td>${table.timeTue16}</td>
-                        </tr>
-                        <tr>
-                            <td>Wednesday</td>
                             <td>${table.timeWed9}</td>
-                            <td>${table.timeWed10}</td>
-                            <td>${table.timeWed11}</td>
-                            <td>${table.timeWed12}</td>
-                            <td>${table.timeWed13}</td>
-                            <td>${table.timeWed14}</td>
-                            <td>${table.timeWed15}</td>
-                            <td>${table.timeWed16}</td>
-                        </tr>
-                        <tr>
-                            <td>Thursday</td>
                             <td>${table.timeThu9}</td>
-                            <td>${table.timeThu10}</td>
-                            <td>${table.timeThu11}</td>
-                            <td>${table.timeThu12}</td>
-                            <td>${table.timeThu13}</td>
-                            <td>${table.timeThu14}</td>
-                            <td>${table.timeThu15}</td>
-                            <td>${table.timeThu16}</td>
-                        </tr>
-                        <tr>
-                            <td>Friday</td>
                             <td>${table.timeFri9}</td>
-                            <td>${table.timeFri10}</td>
-                            <td>${table.timeFri11}</td>
-                            <td>${table.timeFri12}</td>
-                            <td>${table.timeFri13}</td>
-                            <td>${table.timeFri14}</td>
-                            <td>${table.timeFri15}</td>
-                            <td>${table.timeFri16}</td>
-                        </tr>
-                        <tr>
-                            <td>Saturday</td>
                             <td>${table.timeSat9}</td>
-                            <td>${table.timeSat10}</td>
-                            <td>${table.timeSat11}</td>
-                            <td>${table.timeSat12}</td>
-                            <td>${table.timeSat13}</td>
-                            <td>${table.timeSat14}</td>
-                            <td>${table.timeSat15}</td>
-                            <td>${table.timeSat16}</td>
+                            <td>${table.timeSun9}</td>
                         </tr>
                         <tr>
-                            <td>Sunday</td>
-                            <td>${table.timeSun9}</td>
+                            <td>10.00</td>
+                            <td>${table.timeMon10}</td>
+                            <td>${table.timeTue10}</td>
+                            <td>${table.timeWed10}</td>
+                            <td>${table.timeThu10}</td>
+                            <td>${table.timeFri10}</td>
+                            <td>${table.timeSat10}</td>
                             <td>${table.timeSun10}</td>
+                        </tr>
+                        <tr>
+                            <td>11.00</td>
+                            <td>${table.timeMon11}</td>
+                            <td>${table.timeTue11}</td>
+                            <td>${table.timeWed11}</td>
+                            <td>${table.timeThu11}</td>
+                            <td>${table.timeFri11}</td>
+                            <td>${table.timeSat11}</td>
                             <td>${table.timeSun11}</td>
+                        </tr>
+                        <tr>
+                            <td>12.00</td>
+                            <td>${table.timeMon12}</td>
+                            <td>${table.timeTue12}</td>
+                            <td>${table.timeWed12}</td>
+                            <td>${table.timeThu12}</td>
+                            <td>${table.timeFri12}</td>
+                            <td>${table.timeSat12}</td>
                             <td>${table.timeSun12}</td>
+                        </tr>
+                        <tr>
+                            <td>13.00</td>
+                            <td>${table.timeMon13}</td>
+                            <td>${table.timeTue13}</td>
+                            <td>${table.timeWed13}</td>
+                            <td>${table.timeThu13}</td>
+                            <td>${table.timeFri13}</td>
+                            <td>${table.timeSat13}</td>
                             <td>${table.timeSun13}</td>
+                        </tr>
+                        <tr>
+                            <td>14.00</td>
+                            <td>${table.timeMon14}</td>
+                            <td>${table.timeTue14}</td>
+                            <td>${table.timeWed14}</td>
+                            <td>${table.timeThu14}</td>
+                            <td>${table.timeFri14}</td>
+                            <td>${table.timeSat14}</td>
                             <td>${table.timeSun14}</td>
+                        </tr>
+                        <tr>
+                            <td>15.00</td>
+                            <td>${table.timeMon15}</td>
+                            <td>${table.timeTue15}</td>
+                            <td>${table.timeWed15}</td>
+                            <td>${table.timeThu15}</td>
+                            <td>${table.timeFri15}</td>
+                            <td>${table.timeSat15}</td>
                             <td>${table.timeSun15}</td>
+                        </tr>
+                        <tr>
+                            <td>16.00</td>
+                            <td>${table.timeMon16}</td>
+                            <td>${table.timeTue16}</td>
+                            <td>${table.timeWed16}</td>
+                            <td>${table.timeThu16}</td>
+                            <td>${table.timeFri16}</td>
+                            <td>${table.timeSat16}</td>
                             <td>${table.timeSun16}</td>
                         </tr>
                         </tbody>
@@ -204,7 +206,8 @@ const setupTimetable = (data) => {
                 button = `
                 
                 <div class="right-align">
-                <a class="waves-effect waves-light btn-small red"
+                <a class="waves-effect waves-light btn-small red tooltipped" data-position="bottom" 
+                data-tooltip="This timetable will be deleted and cannot be recovered"
                 onclick="deleteTimetable('${docID}')">Delete</a>
                 <a class="modal-trigger waves-effect waves-light btn-small orange"
                                data-target="${docID}+modal-timetable">Update Timetable</a>
@@ -212,7 +215,7 @@ const setupTimetable = (data) => {
               </div>
               </li>`;
 
-            var modal = `
+            let modal = `
                 <!-- EDIT TIMETABLE MODAL -->
                 <div id="${docID}+modal-timetable" class="modal bottom-sheet">
                     <div class="modal-content">
@@ -224,94 +227,95 @@ const setupTimetable = (data) => {
                                     <thead>
                                     <tr>
                                         <th></th>
-                                        <th>9.00</th>
-                                        <th>10.00</th>
-                                        <th>11.00</th>
-                                        <th>12.00</th>
-                                        <th>13.00</th>
-                                        <th>14.00</th>
-                                        <th>15.00</th>
-                                        <th>16.00</th>
+                                        <th>Monday</th>
+                                        <th>Tuesday</th>
+                                        <th>Wednesday</th>
+                                        <th>Thursday</th>
+                                        <th>Friday</th>
+                                        <th>Saturday</th>
+                                        <th>Sunday</th>
                                     </tr>
                                     </thead>
-
                                     <tbody>
                                     <tr>
-                                        <td>Monday</td>
+                                        <td>9.00</td>
                                         <td><input type="text" id="${docID}+timeMon9" value="${table.timeMon9}"></td>
-                                        <td><input type="text" id="${docID}+timeMon10" value="${table.timeMon10}"></td>
-                                        <td><input type="text" id="${docID}+timeMon11" value="${table.timeMon11}"></td>
-                                        <td><input type="text" id="${docID}+timeMon12" value="${table.timeMon12}"></td>
-                                        <td><input type="text" id="${docID}+timeMon13" value="${table.timeMon13}"></td>
-                                        <td><input type="text" id="${docID}+timeMon14" value="${table.timeMon14}"></td>
-                                        <td><input type="text" id="${docID}+timeMon15" value="${table.timeMon15}"></td>
-                                        <td><input type="text" id="${docID}+timeMon16" value="${table.timeMon16}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tuesday</td>
                                         <td><input type="text" id="${docID}+timeTue9" value="${table.timeTue9}"></td>
-                                        <td><input type="text" id="${docID}+timeTue10" value="${table.timeTue10}"></td>
-                                        <td><input type="text" id="${docID}+timeTue11" value="${table.timeTue11}"></td>
-                                        <td><input type="text" id="${docID}+timeTue12" value="${table.timeTue12}"></td>
-                                        <td><input type="text" id="${docID}+timeTue13" value="${table.timeTue13}"></td>
-                                        <td><input type="text" id="${docID}+timeTue14" value="${table.timeTue14}"></td>
-                                        <td><input type="text" id="${docID}+timeTue15" value="${table.timeTue15}"></td>
-                                        <td><input type="text" id="${docID}+timeTue16" value="${table.timeTue16}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Wednesday</td>
                                         <td><input type="text" id="${docID}+timeWed9" value="${table.timeWed9}"></td>
-                                        <td><input type="text" id="${docID}+timeWed10" value="${table.timeWed9}"></td>
-                                        <td><input type="text" id="${docID}+timeWed11" value="${table.timeWed9}"></td>
-                                        <td><input type="text" id="${docID}+timeWed12" value="${table.timeWed9}"></td>
-                                        <td><input type="text" id="${docID}+timeWed13" value="${table.timeWed9}"></td>
-                                        <td><input type="text" id="${docID}+timeWed14" value="${table.timeWed9}"></td>
-                                        <td><input type="text" id="${docID}+timeWed15" value="${table.timeWed9}"></td>
-                                        <td><input type="text" id="${docID}+timeWed16" value="${table.timeWed9}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Thursday</td>
                                         <td><input type="text" id="${docID}+timeThu9" value="${table.timeThu9}"></td>
-                                        <td><input type="text" id="${docID}+timeThu10" value="${table.timeThu10}"></td>
-                                        <td><input type="text" id="${docID}+timeThu11" value="${table.timeThu11}"></td>
-                                        <td><input type="text" id="${docID}+timeThu12" value="${table.timeThu12}"></td>
-                                        <td><input type="text" id="${docID}+timeThu13" value="${table.timeThu13}"></td>
-                                        <td><input type="text" id="${docID}+timeThu14" value="${table.timeThu14}"></td>
-                                        <td><input type="text" id="${docID}+timeThu15" value="${table.timeThu15}"></td>
-                                        <td><input type="text" id="${docID}+timeThu16" value="${table.timeThu16}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Friday</td>
                                         <td><input type="text" id="${docID}+timeFri9" value="${table.timeFri9}"></td>
-                                        <td><input type="text" id="${docID}+timeFri10" value="${table.timeFri10}"></td>
-                                        <td><input type="text" id="${docID}+timeFri11" value="${table.timeFri11}"></td>
-                                        <td><input type="text" id="${docID}+timeFri12" value="${table.timeFri12}"></td>
-                                        <td><input type="text" id="${docID}+timeFri13" value="${table.timeFri13}"></td>
-                                        <td><input type="text" id="${docID}+timeFri14" value="${table.timeFri14}"></td>
-                                        <td><input type="text" id="${docID}+timeFri15" value="${table.timeFri15}"></td>
-                                        <td><input type="text" id="${docID}+timeFri16" value="${table.timeFri16}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Saturday</td>
                                         <td><input type="text" id="${docID}+timeSat9" value="${table.timeSat9}"></td>
-                                        <td><input type="text" id="${docID}+timeSat10" value="${table.timeSat10}"></td>
-                                        <td><input type="text" id="${docID}+timeSat11" value="${table.timeSat11}"></td>
-                                        <td><input type="text" id="${docID}+timeSat12" value="${table.timeSat12}"></td>
-                                        <td><input type="text" id="${docID}+timeSat13" value="${table.timeSat13}"></td>
-                                        <td><input type="text" id="${docID}+timeSat14" value="${table.timeSat14}"></td>
-                                        <td><input type="text" id="${docID}+timeSat15" value="${table.timeSat15}"></td>
-                                        <td><input type="text" id="${docID}+timeSat16" value="${table.timeSat16}"></td>
+                                        <td><input type="text" id="${docID}+timeSun9" value="${table.timeSun9}"></td>
                                     </tr>
                                     <tr>
-                                        <td>Sunday</td>
-                                        <td><input type="text" id="${docID}+timeSun9" value="${table.timeSun9}"></td>
+                                        <td>10.00</td>
+                                        <td><input type="text" id="${docID}+timeMon10" value="${table.timeMon10}"></td>
+                                        <td><input type="text" id="${docID}+timeTue10" value="${table.timeTue10}"></td>
+                                        <td><input type="text" id="${docID}+timeWed10" value="${table.timeWed10}"></td>
+                                        <td><input type="text" id="${docID}+timeThu10" value="${table.timeThu10}"></td>
+                                        <td><input type="text" id="${docID}+timeFri10" value="${table.timeFri10}"></td>
+                                        <td><input type="text" id="${docID}+timeSat10" value="${table.timeSat10}"></td>
                                         <td><input type="text" id="${docID}+timeSun10" value="${table.timeSun10}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>11.00</td>
+                                        <td><input type="text" id="${docID}+timeMon11" value="${table.timeMon11}"></td>
+                                        <td><input type="text" id="${docID}+timeTue11" value="${table.timeTue11}"></td>
+                                        <td><input type="text" id="${docID}+timeWed11" value="${table.timeWed11}"></td>
+                                        <td><input type="text" id="${docID}+timeThu11" value="${table.timeThu11}"></td>
+                                        <td><input type="text" id="${docID}+timeFri11" value="${table.timeFri11}"></td>
+                                        <td><input type="text" id="${docID}+timeSat11" value="${table.timeSat11}"></td>
                                         <td><input type="text" id="${docID}+timeSun11" value="${table.timeSun11}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12.00</td>
+                                        <td><input type="text" id="${docID}+timeMon12" value="${table.timeMon12}"></td>
+                                        <td><input type="text" id="${docID}+timeTue12" value="${table.timeTue12}"></td>
+                                        <td><input type="text" id="${docID}+timeWed12" value="${table.timeWed12}"></td>
+                                        <td><input type="text" id="${docID}+timeThu12" value="${table.timeThu12}"></td>
+                                        <td><input type="text" id="${docID}+timeFri12" value="${table.timeFri12}"></td>
+                                        <td><input type="text" id="${docID}+timeSat12" value="${table.timeSat12}"></td>
                                         <td><input type="text" id="${docID}+timeSun12" value="${table.timeSun12}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>13.00</td>
+                                        <td><input type="text" id="${docID}+timeMon13" value="${table.timeMon13}"></td>
+                                        <td><input type="text" id="${docID}+timeTue13" value="${table.timeTue13}"></td>
+                                        <td><input type="text" id="${docID}+timeWed13" value="${table.timeWed13}"></td>
+                                        <td><input type="text" id="${docID}+timeThu13" value="${table.timeThu13}"></td>
+                                        <td><input type="text" id="${docID}+timeFri13" value="${table.timeFri13}"></td>
+                                        <td><input type="text" id="${docID}+timeSat13" value="${table.timeSat13}"></td>
                                         <td><input type="text" id="${docID}+timeSun13" value="${table.timeSun13}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>14.00</td>
+                                        <td><input type="text" id="${docID}+timeMon14" value="${table.timeMon14}"></td>
+                                        <td><input type="text" id="${docID}+timeTue14" value="${table.timeTue14}"></td>
+                                        <td><input type="text" id="${docID}+timeWed14" value="${table.timeWed14}"></td>
+                                        <td><input type="text" id="${docID}+timeThu14" value="${table.timeThu14}"></td>
+                                        <td><input type="text" id="${docID}+timeFri14" value="${table.timeFri14}"></td>
+                                        <td><input type="text" id="${docID}+timeSat14" value="${table.timeSat14}"></td>
                                         <td><input type="text" id="${docID}+timeSun14" value="${table.timeSun14}"></td>
-                                        <td><input type="text" id="${docID}+timeSun15" value="${table.timeSun15}"></td>
-                                        <td><input type="text" id="${docID}+timeSun16" value="${table.timeSun16}"></td>                  
+                                    </tr>
+                                    <tr>
+                                        <td>15.00</td>
+                                        <td><input type="text" id="${docID}+timeMon15" value="${table.timeMon15}"></td>
+                                        <td><input type="text" id="${docID}+timeTue15" value="${table.timeTue15}"></td>
+                                        <td><input type="text" id="${docID}+timeWed15" value="${table.timeWed15}"></td>
+                                        <td><input type="text" id="${docID}+timeThu15" value="${table.timeThu15}"></td>
+                                        <td><input type="text" id="${docID}+timeFri15" value="${table.timeFri15}"></td>
+                                        <td><input type="text" id="${docID}+timeSat15" value="${table.timeSat15}"></td>
+                                        <td><input type="text" id="${docID}+timeSun15" value="${table.timeSun15}"></td>                 
+                                    </tr>
+                                    <tr>
+                                        <td>15.00</td>
+                                        <td><input type="text" id="${docID}+timeMon16" value="${table.timeMon16}"></td>
+                                        <td><input type="text" id="${docID}+timeTue16" value="${table.timeTue16}"></td>
+                                        <td><input type="text" id="${docID}+timeWed16" value="${table.timeWed16}"></td>
+                                        <td><input type="text" id="${docID}+timeThu16" value="${table.timeThu16}"></td>
+                                        <td><input type="text" id="${docID}+timeFri16" value="${table.timeFri16}"></td>
+                                        <td><input type="text" id="${docID}+timeSat16" value="${table.timeSat16}"></td>
+                                        <td><input type="text" id="${docID}+timeSun16" value="${table.timeSun16}"></td>                 
                                     </tr>
                                     </tbody>
                                 </form>
@@ -320,7 +324,6 @@ const setupTimetable = (data) => {
                              onclick="updateTimetable('${docID}')" >Update</a></div>
                     </div>
                 </div>`
-
             //Display edit buttons for admins
             if(userISAdmin === true) {
                 html += li + button + modal;
@@ -329,11 +332,9 @@ const setupTimetable = (data) => {
             }
         });
         timetableList.innerHTML = html;
-
     } else {
         timetableList.innerHTML = '<div class="center-align">No timetables</div>';
     }
-
     setUpButtons();
 }
 
@@ -403,7 +404,6 @@ function updateTimetable(docID) {
         timeSun14: document.getElementById(docID + '+timeSun14').value,
         timeSun15: document.getElementById(docID + '+timeSun15').value,
         timeSun16: document.getElementById(docID + '+timeSun16').value
-
     }).then(() => {
         console.log("Timetable updated.")
         M.toast({html: 'Timetable updated'});
