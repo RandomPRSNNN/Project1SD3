@@ -68,7 +68,7 @@ adminForm.addEventListener('submit', (e) => {
     });
 });
 
-//signup
+//signup new user
 const signupForm = document.querySelector('#signup-form');
 signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -78,20 +78,25 @@ signupForm.addEventListener('submit', (e) => {
     const password = signupForm['signup-password'].value;
     const passwordRetype = signupForm['signup-password-retype'].value;
 
-    if(password === passwordRetype){
-        // sign up the user & add firestore data
-        auth.createUserWithEmailAndPassword(email, password).then(() => {
-            // close the signup modal & reset form
-            const modal = document.querySelector('#modal-signup');
-            M.Modal.getInstance(modal).close();
-            signupForm.reset();
-            signupForm.querySelector('.error').innerHTML = ''
-            M.toast({html: 'Account ' + email + ' has been created'});
-        }).catch(err => {
-            signupForm.querySelector('.error').innerHTML = err.message;
-        });
+    //only admins can register new users
+    if(auth.token.admin === true){
+        if(password === passwordRetype){
+            // sign up the user & add firestore data
+            auth.createUserWithEmailAndPassword(email, password).then(() => {
+                // close the signup modal & reset form
+                const modal = document.querySelector('#modal-signup');
+                M.Modal.getInstance(modal).close();
+                signupForm.reset();
+                signupForm.querySelector('.error').innerHTML = ''
+                M.toast({html: 'Account ' + email + ' has been created'});
+            }).catch(err => {
+                signupForm.querySelector('.error').innerHTML = err.message;
+            });
+        }else{
+            signupForm.querySelector('.error').innerHTML = 'Entered passwords do not match, try again.'
+        }
     }else{
-        signupForm.querySelector('.error').innerHTML = 'Entered passwords do not match, try again.'
+        M.toast({html: 'Only administrators can register new users!'});
     }
 });
 
