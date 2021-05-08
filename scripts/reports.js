@@ -135,14 +135,14 @@ async function searchReports(month, year) {
             const report = doc.data();
             const docID = doc.id;
 
-            //expenses
-            bills += doc.data().expensesBills;
-            deliveries += doc.data().expensesDeliveries;
-            maintenance += doc.data().expensesMaintenance;
-            rent += doc.data().expensesRent;
-            //sales
-            salesStock += doc.data().salesStock;
-            salesProduce += doc.data().salesProduce;
+            //total expenses
+            bills += report.expensesBills;
+            deliveries += report.expensesDeliveries;
+            maintenance += report.expensesMaintenance;
+            rent += report.expensesRent;
+            //total sales
+            salesStock += report.salesStock;
+            salesProduce += report.salesProduce;
 
             //display individual reports
             let li = `<li>
@@ -199,7 +199,7 @@ async function searchReports(month, year) {
                     <tr>
                         <td><b>Profit</b></td>
                          <td>${(report.salesProduce + report.salesStock) - (report.expensesBills +
-                                report.expensesDeliveries + report.expensesMaintenance + 
+                                report.expensesDeliveries + report.expensesMaintenance +
                                 report.expensesRent)}</td>
                         </tr>
                         </tbody>
@@ -245,14 +245,15 @@ async function searchReports(month, year) {
 
 
     //display data if there are values
-    if (bills !== 0 && deliveries !== 0 && maintenance !== 0 && rent !== 0) {
+    if (bills === 0 && deliveries === 0 && maintenance === 0 && rent === 0) {
+        pushHTML = 'No data';
+        displayTotals = '';
+
+    } else {
         array.push(["Bills", parseInt(bills)]);
         array.push(["Deliveries", parseInt(deliveries)]);
         array.push(["Maintenance", parseInt(maintenance)]);
         array.push(["Rent", parseInt(rent)]);
-    } else {
-        pushHTML = 'No data';
-        displayTotals = '';
     }
     //list items on page
     reportListings.innerHTML = pushHTML;

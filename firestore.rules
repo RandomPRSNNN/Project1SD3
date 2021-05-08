@@ -24,5 +24,9 @@ service cloud.firestore {
             allow read: if request.auth.token.admin == true;
             allow write: if request.auth.token.admin == true;
         }
+        match /reports/{documents=**} {
+            allow read: if request.auth.token.admin == true;
+            allow write: if request.auth.token.admin == true;
+        }
     }
 }

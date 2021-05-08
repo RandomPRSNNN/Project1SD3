@@ -79,7 +79,7 @@ signupForm.addEventListener('submit', (e) => {
     const passwordRetype = signupForm['signup-password-retype'].value;
 
     //only admins can register new users
-    if(auth.token.admin === true){
+    if(userISAdmin){
         if(password === passwordRetype){
             // sign up the user & add firestore data
             auth.createUserWithEmailAndPassword(email, password).then(() => {
